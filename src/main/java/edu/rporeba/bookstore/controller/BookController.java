@@ -2,33 +2,105 @@ package edu.rporeba.bookstore.controller;
 
 import edu.rporeba.bookstore.dto.BookDto;
 import edu.rporeba.bookstore.dto.BookSearchParams;
-import edu.rporeba.bookstore.dto.BorrowerDto;
 import edu.rporeba.bookstore.service.BookService;
 import edu.rporeba.bookstore.service.BorrowerService;
-import edu.rporeba.bookstore.viewmodel.BookCommand;
-import edu.rporeba.bookstore.viewmodel.BookListCommand;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = "/books")
 public class BookController {
 
-    final static Logger logger = Logger.getLogger(BookController.class);
+    private final BookService bookService;
+    private final BorrowerService borrowerService;
 
     @Autowired
-    private BookService bookService;
+    public BookController(BookService bookService, BorrowerService borrowerService) {
+        this.bookService = bookService;
+        this.borrowerService = borrowerService;
+    }
 
-    @Autowired
-    private BorrowerService borrowerService;
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookDto>> getAllBooks() {
+
+        List<BookDto> books = bookService.findAll();
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookDto> getBookDetails(@PathVariable("id") Long id) {
+        BookDto bookDto = bookService.findByBookId(id);
+
+        if (bookDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(bookDto, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<Void> createBook(@RequestBody BookDto bookDto) {
+
+        bookService.saveBook(bookDto);
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long id, @RequestBody BookDto bookDto) {
+
+        BookDto currentBook = bookService.findByBookId(id);
+        bookService.saveBook(currentBook);
+        return new ResponseEntity<>(currentBook, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookDto> deleteBook(@PathVariable("id") Long id) {
+
+        BookDto bookDto = bookService.findByBookId(id);
+        if (bookDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        bookService.deleteBookById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResponseEntity<List<BookDto>> findBySearchTerm(@RequestBody BookSearchParams params) {
+
+        List<BookDto> bookDTO = bookService.findBySearchTerm(params);
+        if (bookDTO.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------------------------------------------------------
+
+    /*
 
     @PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('USER') OR hasAuthority('DBA')")
     @RequestMapping(value = "/books", method = RequestMethod.GET)
@@ -136,5 +208,7 @@ public class BookController {
         return bookDto;
 
     }
+
+    */
 
 }
