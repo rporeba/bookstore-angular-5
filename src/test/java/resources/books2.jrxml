@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="books2" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58dd65d4-f81a-4aa9-b210-c3ddfb956970">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from book, author where book.item_id=author.id;]]>
+	</queryString>
+	<field name="itemId" class="java.lang.Long"/>
+	<field name="bookTitle" class="java.lang.String"/>
+	<field name="isbn" class="java.lang.String"/>
+	<field name="numberOfPage" class="java.lang.Long"/>
+	<field name="published" class="java.time.LocalDate"/>
+	<field name="typeOfBook" class="edu.rporeba.bookstore.model.BookType"/>
+	<field name="author.firstName" class="java.lang.String" />
+	<field name="author.lastName" class="java.lang.String"/>
+
+	<parameter class="java.lang.Long" name="itemId" />
+	<parameter class="java.lang.String" name="bookTitle" />
+	<parameter class="java.lang.String" name="isbn" />
+	<parameter class="java.lang.Long" name="numberOfPage" />
+	<parameter class="java.time.LocalDate" name="published" />
+	<parameter class="edu.rporeba.bookstore.model.BookType" name="typeOfBook" />
+	<parameter class="java.lang.String" name="author.firstName" />
+	<parameter class="java.lang.String" name="author.firstName" />
+
+	<group name="bookTitle">
+		<groupExpression><![CDATA[$F{bookTitle}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#006600" uuid="05b85071-d6e6-40ac-a6e9-1406f00157e2"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bookTitle}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="dfb84de5-3de2-42a9-b4fa-0eb435f41f0c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="79" height="15" uuid="7a16fdf1-ce68-410e-a6c8-03d6d690f8e4"/>
+				<text><![CDATA[itemId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="19" width="79" height="15" uuid="ea0fa383-d0e9-421e-b06b-4c3abf8c53ec"/>
+				<text><![CDATA[isbn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="158" y="19" width="79" height="15" uuid="2e2eb77f-1328-4c22-bc05-626b579766f2"/>
+				<text><![CDATA[numberOfPage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="237" y="19" width="79" height="15" uuid="ece175bf-c732-48e0-8508-dcf87efe28ba"/>
+				<text><![CDATA[typeOfBook]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="395" y="19" width="79" height="15" uuid="5652f1c9-8948-47df-9a27-5873fc5b6e43"/>
+				<text><![CDATA[author.firstName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="474" y="19" width="79" height="15" uuid="020972f3-bdc4-4d0c-836c-45e9467f2c0d"/>
+				<text><![CDATA[author.lastName]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="da2ca51e-97df-43be-863c-f13c936b2876"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="79" height="15" uuid="65f73b49-162a-4004-ad33-90eae864158d"/>
+				<textFieldExpression><![CDATA[$F{itemId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="79" height="15" uuid="31186b13-351f-4bcf-8d00-635717d73ab7"/>
+				<textFieldExpression><![CDATA[$F{isbn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="158" y="0" width="79" height="15" uuid="34ee9a8a-3470-4cc8-8e68-0a97e6872464"/>
+				<textFieldExpression><![CDATA[$F{numberOfPage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="237" y="0" width="79" height="15" uuid="50868b9e-90d4-44c7-a775-866502b29a34"/>
+				<textFieldExpression><![CDATA[$F{typeOfBook}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="395" y="0" width="79" height="15" uuid="adcbc3ba-0a95-47dd-a6e2-89d491bf3975"/>
+				<textFieldExpression><![CDATA[$F{author.firstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="474" y="0" width="79" height="15" uuid="00e509f3-ab36-4cfa-9620-c6ceb096a561"/>
+				<textFieldExpression><![CDATA[$F{author.lastName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="6911e73b-126f-4f46-b3da-a9b9b594af1c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

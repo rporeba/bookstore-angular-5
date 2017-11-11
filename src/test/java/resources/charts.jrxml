@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="books" language="java"  pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="291b2e54-8aef-41dc-94ea-dfa56dedf524">
+
+	<field name = "subjectName" class = "java.lang.String"/>
+	<field name = "marks" class = "java.lang.Integer"/>
+
+	<variable name = "countNumber" class = "java.lang.Integer" calculation = "Count">
+		<variableExpression>
+			<![CDATA[Boolean.TRUE]]>
+		</variableExpression>
+	</variable>
+
+	<background>
+		<band splitType = "Stretch"/>
+	</background>
+
+	<title>
+		<band height = "79" splitType = "Stretch"/>
+	</title>
+
+	<pageHeader>
+		<band height = "200">
+
+			<barChart>
+				<chart evaluationTime = "Report">
+					<reportElement x = "0" y = "0" width = "555" height = "200"/>
+
+					<chartTitle>
+						<titleExpression>
+							<![CDATA["Jasper Report Chart"]]>
+						</titleExpression>
+					</chartTitle>
+				</chart>
+
+				<categoryDataset>
+					<dataset incrementType = "None"/>
+
+					<categorySeries>
+						<seriesExpression>
+							<![CDATA[$F{subjectName}]]>
+						</seriesExpression>
+
+						<categoryExpression>
+							<![CDATA[$F{subjectName}]]>
+						</categoryExpression>
+
+						<valueExpression>
+							<![CDATA[$F{marks}]]>
+						</valueExpression>
+
+					</categorySeries>
+				</categoryDataset>
+
+				<barPlot isShowTickMarks = "false">
+					<plot/>
+				</barPlot>
+			</barChart>
+
+		</band>
+	</pageHeader>
+
+	<columnHeader>
+		<band height = "20" splitType = "Stretch"/>
+	</columnHeader>
+
+	<detail>
+		<band height = "20" splitType = "Stretch"/>
+	</detail>
+
+	<columnFooter>
+		<band height = "20" splitType = "Stretch"/>
+	</columnFooter>
+
+	<pageFooter>
+		<band height = "20" splitType = "Stretch"/>
+	</pageFooter>
+
+	<summary>
+		<band height = "400" splitType = "Stretch">
+
+			<pieChart>
+				<chart evaluationTime = "Report">
+					<reportElement x = "135" y = "0" width = "270" height = "300"/>
+
+					<chartTitle>
+						<titleExpression>
+							<![CDATA["Jasper Report Chart 2"]]>
+						</titleExpression>
+					</chartTitle>
+				</chart>
+
+				<pieDataset>
+					<dataset incrementType = "None"/>
+
+					<keyExpression>
+						<![CDATA[$F{subjectName}]]>
+					</keyExpression>
+
+					<valueExpression>
+						<![CDATA[$F{marks}]]>
+					</valueExpression>
+				</pieDataset>
+
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+
+		</band>
+	</summary>
+
+</jasperReport>
