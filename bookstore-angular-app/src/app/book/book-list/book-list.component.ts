@@ -13,11 +13,15 @@ export class BookListComponent implements OnInit {
 
   private books: Book[];
   private selectedBook;
+  private isButtonDisabled = true;
 
   onSelectionChange(book) {
-    this.selectedBook = Object.assign({}, this.selectedBook, book);
+    this.selectedBook = (<any>Object).assign({}, this.selectedBook, book);
+    this.isButtonDisabled = false;
+    console.log(this.selectedBook);
     console.log(book.itemId);
-    console.log(book);
+    console.log(this.isButtonDisabled);
+
   }
 
   constructor(private bookService: BookService) { }
@@ -31,6 +35,7 @@ export class BookListComponent implements OnInit {
       books => { this.books = books; },
       errrors => { console.log(errrors);}
     );
+    this.isButtonDisabled = true;
   }
 
   deleteBook() {

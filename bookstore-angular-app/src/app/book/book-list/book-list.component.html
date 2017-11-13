@@ -16,7 +16,7 @@
       </thead>
       <tbody id="bookList">
       <tr *ngFor="let book of books">
-        <td><input type="radio" [value]="book.itemId" (change)="onSelectionChange(book)" class="selectedBook" name="itemId"/></td>
+        <td><input type="radio" [value]="book.itemId" (change)="onSelectionChange(book)" name="itemId"/></td>
         <td>{{book.isbn}}</td>
         <td>{{book.bookTitle}}</td>
         <td>{{book.numberOfPage}}</td>
@@ -31,9 +31,9 @@
 
   <div class="nav">
     <a href="/bookstore/newbook" class="btn btn-success custom-width" role="button">New book</a>
-    <button id="editBook" class="btn btn-primary" disabled>Edit</button>
-    <button id="deleteBook" class="btn btn-danger" type="submit" (click)="deleteBook()" >Delete</button>
-    <button id="bookDetails" class="btn btn-info" disabled>Show Details</button>
+    <button id="editBook" class="btn btn-primary" [disabled]="isButtonDisabled" >Edit</button>
+    <button id="deleteBook" class="btn btn-danger" type="submit" (click)="deleteBook()" [disabled]="isButtonDisabled" >Delete</button>
+    <button id="bookDetails" class="btn btn-info" [disabled]="isButtonDisabled">Show Details</button>
   </div>
 
 </div>
