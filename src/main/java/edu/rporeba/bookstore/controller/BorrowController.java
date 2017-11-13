@@ -5,7 +5,6 @@ import edu.rporeba.bookstore.service.BorrowService;
 import edu.rporeba.bookstore.util.BookAlreadyBorrowedException;
 import edu.rporeba.bookstore.viewmodel.BorrowListCommand;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ public class BorrowController {
     @Autowired
     private BorrowService borrowService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/borrows", method = RequestMethod.GET)
     public String getAllBorrows(@ModelAttribute("command") BorrowListCommand command) {
 
@@ -31,7 +30,7 @@ public class BorrowController {
 
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('USER')")
     @RequestMapping(value = "/borrow", method = RequestMethod.POST)
     public String borrowBook(@RequestParam("itemId") Long itemId, @RequestParam("borrowerId") Long borrowerId) {
 
@@ -48,7 +47,7 @@ public class BorrowController {
         }
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/returnBook", method = RequestMethod.POST)
     public String giveBookBack(@RequestParam("id") Long id) {
 

@@ -1,15 +1,12 @@
 package edu.rporeba.bookstore.controller;
 
 import edu.rporeba.bookstore.dto.BorrowerDto;
-import edu.rporeba.bookstore.dto.BorrowerDto;
 import edu.rporeba.bookstore.model.Borrower;
 import edu.rporeba.bookstore.model.JsonResponse;
 import edu.rporeba.bookstore.service.BorrowerService;
 import edu.rporeba.bookstore.viewmodel.BorrowerCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -27,7 +24,7 @@ public class BorrowerController {
     @Autowired
     private BorrowerService borrowerService;
 
-    @PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('DBA')")
+    //@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('DBA')")
     @RequestMapping(value = "/newborrower", method = RequestMethod.GET)
     public String addBorrower(@ModelAttribute("command") BorrowerCommand command) {
 
@@ -36,7 +33,7 @@ public class BorrowerController {
         return "borrowerForm";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('DBA')")
+    //@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('DBA')")
     @RequestMapping(value = "/newborrower", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

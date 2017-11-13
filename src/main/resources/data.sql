@@ -1,7 +1,3 @@
-INSERT INTO userr ( email, password_hash, role) VALUES ( 'admin@localhost', '$2a$04$Q4pEU8VHNgRYOIve2cEJneyx02Ep9tkiJWyUipdVfaKkjq9UJPebC', 'ADMIN');
-INSERT INTO userr ( email, password_hash, role) VALUES ( 'user1@localhost', '$2a$04$D.vf8X.h0Y0dRxWfVUAtheU/GBWRV3rSCLqTWyl8FkR/BKjuHbxOy', 'USER');
-INSERT INTO userr ( email, password_hash, role) VALUES ( 'dba@localhost', '$2a$04$NtPF/YLblQpuzPlBvwiIQO5M8Cz/J2TFNMnyAhAPNKH4/ORogHfIu', 'DBA');
-
 INSERT INTO borrower( borrower_id, first_name, last_name) VALUES (100, 'Anna', 'Piotrowska');
 INSERT INTO borrower( borrower_id, first_name, last_name) VALUES (101, 'Edward', 'Nowakowski');
 INSERT INTO borrower( borrower_id, first_name, last_name) VALUES (102, 'Paulina', 'Kowalska');
