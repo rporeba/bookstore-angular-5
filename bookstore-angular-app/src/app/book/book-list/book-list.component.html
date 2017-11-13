@@ -1,52 +1,39 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <section>
-        <header class="header">
-          <div class="row">
-            <div class="col-md-4">
-              <h1>Books</h1>
-            </div>
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-2">
-
-            </div>
-          </div>
-
-        </header>
-      </section>
-
-      <section class="main">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th></th>
-            <th>ISBN</th>
-            <th>Book Title</th>
-            <th>Number of Page</th>
-            <th>Release Date</th>
-            <th>Type</th>
-            <th>Author name</th>
-            <th>Author surname</th>
-            <th>Borrower</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let book of books">
-            <th scope="row">{{book.itemId}}</th>
-            <td>{{book.isbn}}</td>
-            <td>{{book.bookTitle}}</td>
-            <td>{{book.numberOfPage}}</td>
-            <td>{{book.published}}</td>
-            <td>{{book.typeOfBook}}</td>
-            <td>{{book.authorDto.firstName}}</td>
-            <td>{{book.authorDto.lastName}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </section>
-    </div>
+  <div id="tabs">
+    <table id="book" class="table table-striped">
+      <thead>
+      <tr>
+        <th></th>
+        <th>ISBN</th>
+        <th>Book Title</th>
+        <th>Number of Page</th>
+        <th>Release Date</th>
+        <th>Type</th>
+        <th>Author name</th>
+        <th>Author surname</th>
+        <th>Borrower</th>
+      </tr>
+      </thead>
+      <tbody id="bookList">
+      <tr *ngFor="let book of books">
+        <td><input type="radio" [value]="book.itemId" (change)="onSelectionChange(book)" class="selectedBook" name="itemId"/></td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.bookTitle}}</td>
+        <td>{{book.numberOfPage}}</td>
+        <td>{{book.published}}</td>
+        <td>{{book.typeOfBook}}</td>
+        <td>{{book.authorDto.firstName}}</td>
+        <td>{{book.authorDto.lastName}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div class="nav">
+    <a href="/bookstore/newbook" class="btn btn-success custom-width" role="button">New book</a>
+    <button id="editBook" class="btn btn-primary" disabled>Edit</button>
+    <button id="deleteBook" class="btn btn-danger" type="submit" (click)="deleteBook()" >Delete</button>
+    <button id="bookDetails" class="btn btn-info" disabled>Show Details</button>
+  </div>
+
 </div>

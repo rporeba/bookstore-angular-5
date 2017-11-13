@@ -12,6 +12,13 @@ import { BookService} from "../book.service";
 export class BookListComponent implements OnInit {
 
   private books: Book[];
+  private selectedBook;
+
+  onSelectionChange(book) {
+    this.selectedBook = Object.assign({}, this.selectedBook, book);
+    console.log(book.itemId);
+    console.log(book);
+  }
 
   constructor(private bookService: BookService) { }
 
@@ -21,13 +28,19 @@ export class BookListComponent implements OnInit {
 
   getAllUsers() {
     this.bookService.getAllBooks().subscribe(
-      books => {
-        this.books = books;
-      },
-      err => {
-        console.log(err);
-      }
+      books => { this.books = books; },
+      errrors => { console.log(errrors);}
     );
   }
+
+  deleteBook() {
+      this.bookService.deleteBookById(this.selectedBook.itemId).subscribe(
+        res => {this.getAllUsers();
+          console.log('Book has been deleted successfully');
+        }
+      )
+  }
+
+
 
 }
