@@ -30,10 +30,10 @@
   </div>
 
   <div class="nav">
-    <a href="/bookstore/newbook" class="btn btn-success custom-width" role="button">New book</a>
+    <button class="btn btn-success custom-width" (click)="open(content)">New book</button>
     <button id="editBook" class="btn btn-primary" [disabled]="isButtonDisabled" >Edit</button>
-    <button id="deleteBook" class="btn btn-danger" type="submit" (click)="deleteBook()" [disabled]="isButtonDisabled" >Delete</button>
-    <button id="bookDetails" class="btn btn-info" [disabled]="isButtonDisabled">Show Details</button>
+    <button type="button" class="btn btn-danger" (click)="deleteBook(book)" [disabled]="isButtonDisabled" >Delete</button>
+    <button type="button" class="btn btn-info" (click)="redirectBookDetailsPage()" [disabled]="isButtonDisabled">Book Details</button>
   </div>
 
 </div>

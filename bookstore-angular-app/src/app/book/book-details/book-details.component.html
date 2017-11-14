@@ -1,0 +1,24 @@
+<div class="container">
+  <div id="tabs">
+    <table id="books" class="table table-striped">
+
+      <div *ngIf="book">
+        <div><span>Book ID:           </span>{{book.itemId}}</div>
+        <div><span>ISBN:              </span>{{book.isbn}}</div>
+        <div><span>Book Title:        </span>{{book.bookTitle}}</div>
+        <div><span>Release Date:      </span>{{book.published}}</div>
+        <div><span>Number of Page:    </span>{{book.numberOfPage}}</div>
+        <div><span>Type:              </span>{{book.typeOfBook}}</div>
+        <div><span>Author first name: </span>{{book.authorDto.firstName}}</div>
+        <div><span>Author last  name: </span>{{book.authorDto.lastName}}</div>
+      </div>
+
+    </table>
+  </div>
+
+  <div class="nav">
+    <button class="btn btn-success custom-width" (click)="open(content)">New book</button>
+    <button type="button" class="btn btn-warning" (click)="redirectBookListPage()">Back</button>
+  </div>
+
+</div>

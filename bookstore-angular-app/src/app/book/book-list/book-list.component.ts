@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Book } from "../Book";
-import { BookService} from "../book.service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Book} from "../Book";
+import {BookService} from "../book.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
@@ -12,25 +13,23 @@ import { BookService} from "../book.service";
 export class BookListComponent implements OnInit {
 
   private books: Book[];
-  private selectedBook;
+  private selectedBook: Book;
   private isButtonDisabled = true;
 
   onSelectionChange(book) {
     this.selectedBook = (<any>Object).assign({}, this.selectedBook, book);
     this.isButtonDisabled = false;
-    console.log(this.selectedBook);
-    console.log(book.itemId);
-    console.log(this.isButtonDisabled);
-
   }
 
-  constructor(private bookService: BookService) { }
+  constructor(
+    private router: Router,
+    private bookService: BookService) { }
 
   ngOnInit() {
-    this.getAllUsers();
+    this.getAllBooks();
   }
 
-  getAllUsers() {
+  getAllBooks() {
     this.bookService.getAllBooks().subscribe(
       books => { this.books = books; },
       errrors => { console.log(errrors);}
@@ -39,13 +38,14 @@ export class BookListComponent implements OnInit {
   }
 
   deleteBook() {
-      this.bookService.deleteBookById(this.selectedBook.itemId).subscribe(
-        res => {this.getAllUsers();
-          console.log('Book has been deleted successfully');
-        }
-      )
+    this.bookService.deleteBookById(this.selectedBook.itemId).subscribe(
+      res => { this.getAllBooks();
+        console.log('Book has been deleted successfully');
+      })
   }
 
-
+  redirectBookDetailsPage() {
+    this.router.navigate(['/bookstore/bookDetails/', this.selectedBook.itemId])
+  }
 
 }

@@ -1,4 +1,5 @@
 import {Author} from "./Author";
+import {Borrower} from "./Borrower";
 
 export class Book {
 
@@ -9,8 +10,10 @@ export class Book {
   published: object;
   typeOfBook: string;
   authorDto: Author;
+  borrowerDto: Borrower;
 
-  constructor(itemId: number, isbn: string, bookTitle: string, numberOfPage: number, published: Object, typeOfBook: string, authorDto: Author) {
+
+  constructor(itemId: number, isbn: string, bookTitle: string, numberOfPage: number, published: Object, typeOfBook: string, authorDto: Author, borrowerDto: Borrower) {
     this.itemId = itemId;
     this.isbn = isbn;
     this.bookTitle = bookTitle;
@@ -18,6 +21,6 @@ export class Book {
     this.published = published;
     this.typeOfBook = typeOfBook;
     this.authorDto = authorDto;
+    this.borrowerDto = borrowerDto;
   }
-
 }
