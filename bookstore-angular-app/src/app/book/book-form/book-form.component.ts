@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BookService} from "../book.service";
 import {Book} from "../Book";
 
@@ -21,7 +21,7 @@ export class BookFormComponent implements OnInit, OnDestroy {
   }
 
   open(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
+    this.modalService.open(content);
   }
 
   ngOnDestroy(): void {

@@ -30,10 +30,114 @@
   </div>
 
   <div class="nav">
-    <button class="btn btn-success custom-width" (click)="open(content)">New book</button>
+    <button class="btn btn-success custom-width" (click)="open(book)">New book</button>
     <button id="editBook" class="btn btn-primary" [disabled]="isButtonDisabled" >Edit</button>
     <button type="button" class="btn btn-danger" (click)="deleteBook(book)" [disabled]="isButtonDisabled" >Delete</button>
     <button type="button" class="btn btn-info" (click)="redirectBookDetailsPage()" [disabled]="isButtonDisabled">Book Details</button>
   </div>
 
 </div>
+
+
+<ng-template #book let-c="close" let-d="dismiss" >
+  <div class="modal-header">
+    <h4 class="modal-title">Book form</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+<!--    <div class="form-group">
+      <label for="isbn">ISBN:</label>
+      <input type="text" class="form-control" id="isbn"
+             required [(ngModel)]="selectedBook" name="isbn">
+    </div>-->
+
+    <div class="form-group row">
+      <label for="isbn" class="col-3 col-form-label">ISBN:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="isbn" type="text"id="isbn">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="bookTitle" class="col-3 col-form-label">Book Title:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="bookTitle">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="numberOfPage" class="col-3 col-form-label">Number of Page:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="numberOfPage">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="published" class="col-3 col-form-label">Release Date:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="published">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="typeOfBook" class="col-3 col-form-label">Type:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="typeOfBook">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstName" class="col-3 col-form-label">Author first name:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="firstName">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="lastName" class="col-3 col-form-label">Author last name:</label>
+      <div class="col-8">
+        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="lastName">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveBook()">Save book</button>
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+
+</ng-template>
+
+
+
+<!--
+<ng-template #book let-c="close" let-d="dismiss">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        ...
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="c('Close click')">Save book</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+</ng-template>
+-->

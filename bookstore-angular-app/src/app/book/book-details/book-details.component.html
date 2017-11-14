@@ -13,6 +13,21 @@
         <div><span>Author last  name: </span>{{book.authorDto.lastName}}</div>
       </div>
 
+      <div *ngIf="book">
+        <div class="row">
+          <div class="col-xs-6">Book ID:</div>
+          <div class="col-xs-9  pull-left">{{ book.itemId }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">ISBN:</div>
+          <div class="col-xs-9 pull-left">{{ book.isbn }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Book Title:</div>
+          <div class="col-xs-9 pull-left">{{ book.bookTitle }}</div>
+        </div>
+      </div>
+
     </table>
   </div>
 
