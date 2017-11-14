@@ -9,8 +9,8 @@
         <th>Number of Page</th>
         <th>Release Date</th>
         <th>Type</th>
-        <th>Author name</th>
-        <th>Author surname</th>
+        <th>Author first name</th>
+        <th>Author last name</th>
         <th>Borrower</th>
       </tr>
       </thead>
@@ -40,104 +40,109 @@
 
 
 <ng-template #book let-c="close" let-d="dismiss" >
-  <div class="modal-header">
-    <h4 class="modal-title">Book form</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
 
-<!--    <div class="form-group">
-      <label for="isbn">ISBN:</label>
-      <input type="text" class="form-control" id="isbn"
-             required [(ngModel)]="selectedBook" name="isbn">
-    </div>-->
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
 
-    <div class="form-group row">
-      <label for="isbn" class="col-3 col-form-label">ISBN:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="isbn" type="text"id="isbn">
-      </div>
+    <div class="modal-header">
+      <h4 class="modal-title">Book form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
 
-    <div class="form-group row">
-      <label for="bookTitle" class="col-3 col-form-label">Book Title:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="bookTitle">
-      </div>
+    <div class="modal-body">
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">ISBN:</label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="isbn">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">Book Title:</label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="bookTitle">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">Number of Page:</label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="numberOfPage">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">Type of book:</label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="typeOfBook">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">Author first name: </label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-3 col-form-label">Author last name: </label>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="lastName">
+          </div>
+        </div>
+
+      <!--
+            <div class="form-group row">
+              <label for="isbn" class="col-3 col-form-label">ISBN:</label>
+              <div class="col-8">
+                <input type="text" class="form-control" formControlName="isbn">
+              </div>
+            </div>
+      -->
+
+
     </div>
 
-    <div class="form-group row">
-      <label for="numberOfPage" class="col-3 col-form-label">Number of Page:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="numberOfPage">
-      </div>
+    <div class="modal-footer">
+     <!-- <button type="button" class="btn btn-primary" (click)="saveBook()">Save book</button>-->
+      <button type="submit" class="btn btn-primary"  [disabled]="!bookForm.valid" >Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
     </div>
-
-    <div class="form-group row">
-      <label for="published" class="col-3 col-form-label">Release Date:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="published">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="typeOfBook" class="col-3 col-form-label">Type:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="typeOfBook">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="firstName" class="col-3 col-form-label">Author first name:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="firstName">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="lastName" class="col-3 col-form-label">Author last name:</label>
-      <div class="col-8">
-        <input class="form-control" required [(ngModel)]="selectedBook" type="text" id="lastName">
-      </div>
-    </div>
-
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="saveBook()">Save book</button>
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-  </div>
+  </form>
 
 </ng-template>
 
 
-
-<!--
-<ng-template #book let-c="close" let-d="dismiss">
-
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        ...
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="c('Close click')">Save book</button>
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-      </div>
-
+<!--<form novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text"
+             class="form-control"
+             formControlName="firstName">
     </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text"
+             class="form-control"
+             formControlName="lastName">
+    </div>
+  </fieldset>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email"
+           class="form-control"
+           formControlName="email">
   </div>
 
-</ng-template>
--->
+  <button type="submit" class="btn btn-primary"  [disabled]="!userForm.valid" >Submit</button>
+  <button type="button" class="btn btn-warning" (click)="redirectUserPage()">Cancel</button>
+  <pre>{{userForm.value | json}}</pre>
+</form>
+</section>-->
+

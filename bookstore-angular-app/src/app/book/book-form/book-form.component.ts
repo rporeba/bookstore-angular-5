@@ -15,13 +15,14 @@ export class BookFormComponent implements OnInit, OnDestroy {
   private book: Book;
   private sub: any;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,
+              private bookService: BookService,) {}
 
   ngOnInit() {
   }
 
-  open(content) {
-    this.modalService.open(content);
+  open(book) {
+    this.modalService.open(book);
   }
 
   ngOnDestroy(): void {
