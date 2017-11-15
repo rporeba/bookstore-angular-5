@@ -40,7 +40,7 @@ public class BookDto implements Serializable {
 //    @Valid
 //    private boolean isBookBorrowed;
 
-    @Valid
+    //@Valid
     private AuthorDto authorDto;
 
     private ItemDto itemDto;

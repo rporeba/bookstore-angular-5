@@ -33,7 +33,7 @@ public class Book extends Item implements Serializable {
     @NotNull
     private Long numberOfPage;
 
-    @NotNull
+    //@NotNull
     @DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate published;
 

@@ -27,7 +27,7 @@ export class BookService {
 
   createBook(book: Book): Observable<Book> {
     return this.http.post(this.apiUrl, book)
-      .map((res:Response) => res.json())
+      //.map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error when creating a new book'));
   }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {Book} from "../Book";
 import {BookService} from "../book.service";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -126,55 +126,51 @@ export class BookListComponent implements OnInit {
       )
     );
     this.bookService.createBook(book).subscribe(
-/*      res => { this.getAllBooks();
+      res => { this.getAllBooks();
         console.log('Book has been deleted successfully');
-      }*/
-    );
-    console.log(book.authorDto);
-    console.log(book.authorDto.firstName);
-
-/*    if (this.bookForm.valid) {
-      if (this.itemId) {
-        let book: Book = new Book(this.itemId,
-          this.bookForm.controls['isbn'].value,
-          this.bookForm.controls['bookTitle'].value,
-          this.bookForm.controls['numberOfPage'].value,
-          this.bookForm.controls['typeOfBook'].value,
-          new Author(
-          this.bookForm.controls['firstName'].value,
-          this.bookForm.controls['lastName'].value
-          )
-        );
-        this.bookService.updateBook(book).subscribe(
-          res => { this.getAllBooks();
-            console.log('Book has been deleted successfully');
-          }
-        );
-      } else {
-        let book: Book = new Book(null,
-          this.bookForm.controls['isbn'].value,
-          this.bookForm.controls['bookTitle'].value,
-          this.bookForm.controls['numberOfPage'].value,
-          this.bookForm.controls['typeOfBook'].value,
-          new Author(
-            this.bookForm.controls['firstName'].value,
-            this.bookForm.controls['lastName'].value
-          )
-        );
-        this.bookService.createBook(book).subscribe(
-          res => { this.getAllBooks();
-            console.log('Book has been deleted successfully');
-          }
-        );
       }
+    );
 
-      //this.bookForm.reset();
-      //this.router.navigate(['/bookstore/books']);
+    /*    if (this.bookForm.valid) {
+          if (this.itemId) {
+            let book: Book = new Book(this.itemId,
+              this.bookForm.controls['isbn'].value,
+              this.bookForm.controls['bookTitle'].value,
+              this.bookForm.controls['numberOfPage'].value,
+              this.bookForm.controls['typeOfBook'].value,
+              new Author(
+              this.bookForm.controls['firstName'].value,
+              this.bookForm.controls['lastName'].value
+              )
+            );
+            this.bookService.updateBook(book).subscribe(
+              res => { this.getAllBooks();
+                console.log('Book has been deleted successfully');
+              }
+            );
+          } else {
+            let book: Book = new Book(null,
+              this.bookForm.controls['isbn'].value,
+              this.bookForm.controls['bookTitle'].value,
+              this.bookForm.controls['numberOfPage'].value,
+              this.bookForm.controls['typeOfBook'].value,
+              new Author(
+                this.bookForm.controls['firstName'].value,
+                this.bookForm.controls['lastName'].value
+              )
+            );
+            this.bookService.createBook(book).subscribe(
+              res => { this.getAllBooks();
+                console.log('Book has been deleted successfully');
+              }
+            );
+          }
 
-    }*/
+          //this.bookForm.reset();
+          //this.router.navigate(['/bookstore/books']);
+
+        }*/
   }
-
-
 
   getBookDetails() {;
     this.bookService.findBookById(this.selectedBook.itemId)
