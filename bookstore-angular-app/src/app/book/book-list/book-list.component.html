@@ -30,18 +30,17 @@
   </div>
 
   <div class="nav">
-    <button class="btn btn-success custom-width" (click)="open(book)">New book</button>
-    <button id="editBook" class="btn btn-primary" [disabled]="isButtonDisabled" >Edit</button>
-    <button type="button" class="btn btn-danger" (click)="deleteBook(book)" [disabled]="isButtonDisabled" >Delete</button>
+    <button type="button" class="btn btn-success custom-width" (click)="open(bookDialog)">New book</button>
+    <button type="button" class="btn btn-primary" (click)="editForm(bookDialog)" [disabled]="isButtonDisabled" >Edit</button>
+    <button type="button" class="btn btn-danger" (click)="deleteBook()" [disabled]="isButtonDisabled" >Delete</button>
     <button type="button" class="btn btn-info" (click)="redirectBookDetailsPage()" [disabled]="isButtonDisabled">Book Details</button>
   </div>
 
 </div>
 
 
-<ng-template #book let-c="close" let-d="dismiss" >
-
-  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
+<ng-template #bookDialog let-c="close" let-d="dismiss" >
+  <form novalidate [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
 
     <div class="modal-header">
       <h4 class="modal-title">Book form</h4>
@@ -51,6 +50,10 @@
     </div>
 
     <div class="modal-body">
+
+<!--        <div class="col-8">
+          <input type="text" class="form-control" formControlName="itemId" hidden>
+        </div>-->
 
         <div class="form-group row">
           <label class="col-3 col-form-label">ISBN:</label>
@@ -76,7 +79,9 @@
         <div class="form-group row">
           <label class="col-3 col-form-label">Type of book:</label>
           <div class="col-8">
-            <input type="text" class="form-control" formControlName="typeOfBook">
+              <select class="form-control" id="typeOfBook" formControlName="typeOfBook">
+                <option *ngFor="let typeOfBook of typesOfBook" >{{typeOfBook}}</option>
+              </select>
           </div>
         </div>
 
@@ -94,56 +99,12 @@
           </div>
         </div>
 
-
-<!--
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text" class="form-control" id="alterEgo"
-               [(ngModel)]="model.alterEgo" name="alterEgo">
-      </div>
--->
-
-
-
     </div>
 
     <div class="modal-footer">
-     <!-- <button type="button" class="btn btn-primary" (click)="saveBook()">Save book</button>-->
       <button type="submit" class="btn btn-primary"  [disabled]="!bookForm.valid" >Submit</button>
       <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
     </div>
+
   </form>
-
 </ng-template>
-
-
-<!--<form novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text"
-             class="form-control"
-             formControlName="firstName">
-    </div>
-
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text"
-             class="form-control"
-             formControlName="lastName">
-    </div>
-  </fieldset>
-
-  <div class="form-group">
-    <label>Email</label>
-    <input type="email"
-           class="form-control"
-           formControlName="email">
-  </div>
-
-  <button type="submit" class="btn btn-primary"  [disabled]="!userForm.valid" >Submit</button>
-  <button type="button" class="btn btn-warning" (click)="redirectUserPage()">Cancel</button>
-  <pre>{{userForm.value | json}}</pre>
-</form>
-</section>-->
-

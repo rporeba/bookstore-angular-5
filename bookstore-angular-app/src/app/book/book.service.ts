@@ -33,7 +33,7 @@ export class BookService {
 
   updateBook(book: Book): Observable<Book> {
     return this.http.put(this.apiUrl, book)
-      .map((res:Response) => res.json())
+      //.map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error when updating an existing book'));
   }
 

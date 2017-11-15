@@ -55,12 +55,12 @@ public class BookController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long id, @RequestBody BookDto bookDto) {
+    @RequestMapping( method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookDto> updateBook( @RequestBody BookDto bookDto) {
 
-        BookDto currentBook = bookService.findByBookId(id);
-        bookService.saveBook(currentBook);
-        return new ResponseEntity<>(currentBook, HttpStatus.OK);
+        bookService.saveBook(bookDto);
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.OK);
 
     }
 
