@@ -40,7 +40,7 @@
 
 
 <ng-template #bookDialog let-c="close" let-d="dismiss" >
-  <form novalidate [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
 
     <div class="modal-header">
       <h4 class="modal-title">Book form</h4>

@@ -39,6 +39,11 @@ export class BookListComponent implements OnInit {
 
   ngOnInit() {
     this.getAllBooks();
+
+    this.sub = this.route.params.subscribe(params => {
+      this.itemId = params['itemId'];
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -49,9 +54,6 @@ export class BookListComponent implements OnInit {
 
     this.modalService.open(book);
 
-    this.sub = this.route.params.subscribe(params => {
-      this.itemId = params['itemId'];
-    });
 
     this.bookForm = new FormGroup({
       //itemId: new FormControl(''),
@@ -101,7 +103,7 @@ export class BookListComponent implements OnInit {
 
   onSubmit() {
     if (this.bookForm.valid) {
-      if (this.selectedBook.itemId) {
+      if (this.itemId) {
         let book: Book = new Book(this.itemId,
           this.bookForm.controls['isbn'].value,
           this.bookForm.controls['bookTitle'].value,
@@ -137,6 +139,7 @@ export class BookListComponent implements OnInit {
         );
       }
     }
+    this.itemId= null;
   }
 
   getAllBooks() {
