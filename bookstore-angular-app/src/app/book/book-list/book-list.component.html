@@ -1,5 +1,3 @@
-
-
 <div class="container">
 
   <div id="header">
@@ -76,10 +74,6 @@
 
     <div class="modal-body">
 
-<!--        <div class="col-8">
-          <input type="text" class="form-control" formControlName="itemId" hidden>
-        </div>-->
-
         <div class="form-group row"
              [ngClass]="{
               'has-danger': isbn.invalid && (isbn.dirty || isbn.touched),
@@ -129,8 +123,9 @@
               'has-success': published.valid && (published.dirty || published.touched)}">
         <label class="col-3 col-form-label">Release Date:</label>
         <div class="col-8">
-<!--          <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="published">-->
+         <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="published">
 
+<!--
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd"
                   type="text" formControlName="published" ngbDatepicker #d="ngbDatepicker">
@@ -138,6 +133,7 @@
               <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
             </button>
           </div>
+-->
 
 
           <div class="form-control-feedback"

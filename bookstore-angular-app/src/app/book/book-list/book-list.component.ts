@@ -35,8 +35,6 @@ export class BookListComponent implements OnInit {
   book: Book;
   private author: Author;
   private sub: any;
-  today = Date.now();
-
 
   onSelectionChange(book) {
     this.selectedBook = (<any>Object).assign({}, this.selectedBook, book);
@@ -68,16 +66,6 @@ export class BookListComponent implements OnInit {
     this.createFormControls();
     this.createForm();
 
-/*    this.bookForm = new FormGroup({
-      //itemId: new FormControl(''),
-      isbn: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      bookTitle: new FormControl('', Validators.required),
-      numberOfPage: new FormControl('', Validators.required),
-      typeOfBook: new FormControl('', Validators.required),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required)
-    });*/
-
   }
 
   createFormControls() {
@@ -106,16 +94,6 @@ export class BookListComponent implements OnInit {
     this.modalRef = this.modalService.open(book);
     this.createFormControls();
     this.createForm();
-
-/*    this.bookForm = new FormGroup({
-      itemId: new FormControl(''),
-      isbn: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      bookTitle: new FormControl('', Validators.required),
-      numberOfPage: new FormControl('', Validators.required),
-      typeOfBook: new FormControl('', Validators.required),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required)
-    });*/
 
     if (this.selectedBook.itemId) {
       this.bookService.findBookById(this.selectedBook.itemId).subscribe(
