@@ -15,7 +15,7 @@ import {Author} from "../Author";
 })
 export class BookListComponent implements OnInit {
 
-  typesOfBook = ['SCI', 'ADVENTAGE'];
+  typesOfBook = ['SCI', 'ADVENTAGE', 'CRIME'];
 
   private itemId: number;
   private books: Book[];
