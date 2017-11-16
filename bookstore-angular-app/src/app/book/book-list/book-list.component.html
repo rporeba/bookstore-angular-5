@@ -45,7 +45,7 @@
         <td>{{book.isbn}}</td>
         <td>{{book.bookTitle}}</td>
         <td>{{book.numberOfPage}}</td>
-        <td>{{book.published | date:'yyyy'}}</td>
+        <td>{{book.published | date:'yyyy-MM-dd'}}</td>
         <td>{{book.typeOfBook}}</td>
         <td>{{book.authorDto.firstName}}</td>
         <td>{{book.authorDto.lastName}}</td>
@@ -122,6 +122,30 @@
             </div>
           </div>
         </div>
+
+      <div class="form-group row"
+           [ngClass]="{
+              'has-danger': published.invalid && (published.dirty || published.touched),
+              'has-success': published.valid && (published.dirty || published.touched)}">
+        <label class="col-3 col-form-label">Release Date:</label>
+        <div class="col-8">
+<!--          <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="published">-->
+
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                  type="text" formControlName="published" ngbDatepicker #d="ngbDatepicker">
+            <button class="input-group-addon" (click)="d.toggle()" type="button">
+              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div>
+
+
+          <div class="form-control-feedback"
+               *ngIf="published.invalid && (published.dirty || published.touched)">
+            <p *ngIf="published.errors">Release Date is required</p>
+          </div>
+        </div>
+      </div>
 
         <div class="form-group row"
              [ngClass]="{

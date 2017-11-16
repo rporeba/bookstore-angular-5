@@ -26,6 +26,7 @@ export class BookListComponent implements OnInit {
   isbn: FormControl;
   bookTitle: FormControl;
   numberOfPage: FormControl;
+  published: FormControl;
   typeOfBook: FormControl;
   firstName: FormControl;
   lastName: FormControl;
@@ -83,6 +84,7 @@ export class BookListComponent implements OnInit {
     this.isbn = new FormControl('', Validators.required);
     this.bookTitle = new FormControl('', Validators.required);
     this.numberOfPage = new FormControl('', [Validators.required,]);
+    this.published = new FormControl('', [Validators.required,]);
     this.typeOfBook = new FormControl('', Validators.required);
     this.firstName = new FormControl('', Validators.required);
     this.lastName = new FormControl('', Validators.required);
@@ -92,6 +94,7 @@ export class BookListComponent implements OnInit {
       isbn: this.isbn,
       bookTitle: this.bookTitle,
       numberOfPage: this.numberOfPage,
+      published: this.published,
       typeOfBook: this.typeOfBook,
       firstName: this.firstName,
       lastName: this.lastName
@@ -122,6 +125,7 @@ export class BookListComponent implements OnInit {
             isbn: book.isbn,
             bookTitle: book.bookTitle,
             numberOfPage: book.numberOfPage,
+            published: book.published,
             typeOfBook: book.typeOfBook,
             firstName: book.authorDto.firstName,
             lastName: book.authorDto.lastName
@@ -131,6 +135,8 @@ export class BookListComponent implements OnInit {
         }
       );
     }
+
+
 
   }
 
