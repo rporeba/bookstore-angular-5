@@ -1,5 +1,8 @@
 package edu.rporeba.bookstore.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import edu.rporeba.bookstore.model.BookType;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +36,11 @@ public class BookDto implements Serializable {
     private Long numberOfPage;
 
     @Valid
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
     @NotNull
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonDeserialize(using = LocalDateDeserializer.class)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate published;
 
 //    @Valid

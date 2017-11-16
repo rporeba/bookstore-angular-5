@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation, Pipe} from "@angular/core";
 import {Book} from "../Book";
 import {BookService} from "../book.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {FormControl, FormGroup, Validators, ReactiveFormsModule} from "@angular/forms";
 import {Author} from "../Author";
 
 @Component({
@@ -20,11 +20,22 @@ export class BookListComponent implements OnInit {
   private itemId: number;
   private books: Book[];
   selectedBook: Book;
+  private modalRef: NgbModalRef;
+
   bookForm: FormGroup;
+  isbn: FormControl;
+  bookTitle: FormControl;
+  numberOfPage: FormControl;
+  typeOfBook: FormControl;
+  firstName: FormControl;
+  lastName: FormControl;
+
   private isButtonDisabled = true;
   book: Book;
   private author: Author;
   private sub: any;
+  today = Date.now();
+
 
   onSelectionChange(book) {
     this.selectedBook = (<any>Object).assign({}, this.selectedBook, book);
@@ -35,7 +46,7 @@ export class BookListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private bookService: BookService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,) { }
 
   ngOnInit() {
     this.getAllBooks();
@@ -52,34 +63,56 @@ export class BookListComponent implements OnInit {
 
   open(book) {
 
-    this.modalService.open(book);
+    this.modalRef = this.modalService.open(book);
+    this.createFormControls();
+    this.createForm();
 
-
-    this.bookForm = new FormGroup({
+/*    this.bookForm = new FormGroup({
       //itemId: new FormControl(''),
-      isbn: new FormControl('', Validators.required),
+      isbn: new FormControl('', [Validators.required, Validators.minLength(8)]),
       bookTitle: new FormControl('', Validators.required),
       numberOfPage: new FormControl('', Validators.required),
       typeOfBook: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required)
-    });
+    });*/
 
+  }
+
+  createFormControls() {
+    this.isbn = new FormControl('', Validators.required);
+    this.bookTitle = new FormControl('', Validators.required);
+    this.numberOfPage = new FormControl('', [Validators.required,]);
+    this.typeOfBook = new FormControl('', Validators.required);
+    this.firstName = new FormControl('', Validators.required);
+    this.lastName = new FormControl('', Validators.required);
+  }
+  createForm() {
+    this.bookForm = new FormGroup({
+      isbn: this.isbn,
+      bookTitle: this.bookTitle,
+      numberOfPage: this.numberOfPage,
+      typeOfBook: this.typeOfBook,
+      firstName: this.firstName,
+      lastName: this.lastName
+    });
   }
 
   editForm(book) {
 
-    this.modalService.open(book);
+    this.modalRef = this.modalService.open(book);
+    this.createFormControls();
+    this.createForm();
 
-    this.bookForm = new FormGroup({
+/*    this.bookForm = new FormGroup({
       itemId: new FormControl(''),
-      isbn: new FormControl('', Validators.required),
+      isbn: new FormControl('', [Validators.required, Validators.minLength(8)]),
       bookTitle: new FormControl('', Validators.required),
       numberOfPage: new FormControl('', Validators.required),
       typeOfBook: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required)
-    });
+    });*/
 
     if (this.selectedBook.itemId) {
       this.bookService.findBookById(this.selectedBook.itemId).subscribe(
@@ -108,6 +141,7 @@ export class BookListComponent implements OnInit {
           this.bookForm.controls['isbn'].value,
           this.bookForm.controls['bookTitle'].value,
           this.bookForm.controls['numberOfPage'].value,
+          this.bookForm.controls['published'].value,
           this.bookForm.controls['typeOfBook'].value,
           new Author(
             this.bookForm.controls['firstName'].value,
@@ -125,6 +159,7 @@ export class BookListComponent implements OnInit {
           this.bookForm.controls['isbn'].value,
           this.bookForm.controls['bookTitle'].value,
           this.bookForm.controls['numberOfPage'].value,
+          this.bookForm.controls['published'].value,
           this.bookForm.controls['typeOfBook'].value,
           new Author(
             this.bookForm.controls['firstName'].value,
@@ -140,11 +175,13 @@ export class BookListComponent implements OnInit {
       }
     }
     this.itemId= null;
+    this.modalRef.close(this.book);
   }
 
   getAllBooks() {
     this.bookService.getAllBooks().subscribe(
-      books => { this.books = books; },
+      books => { this.books = books;
+      },
       errrors => { console.log(errrors);}
     );
     this.isButtonDisabled = true;

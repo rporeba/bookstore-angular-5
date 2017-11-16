@@ -1,4 +1,29 @@
+
+
 <div class="container">
+
+  <div id="header">
+    <h3>Search books</h3>
+  </div>
+
+  <form class="form-inline" id="search-form">
+    <div class="form-group">
+      <input type="text" class="form-control" id="bookTitle" placeholder="Book title">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="isbn" placeholder="Isbn">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="typeOfBook" placeholder="Type of book">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="authorLastName" placeholder="Author Last Name">
+    </div>
+    <div class="nav">
+      <button type="submit" id="bth-search" class="btn btn-success">Search book</button>
+    </div>
+  </form>
+
   <div id="tabs">
     <table id="book" class="table table-striped">
       <thead>
@@ -20,7 +45,7 @@
         <td>{{book.isbn}}</td>
         <td>{{book.bookTitle}}</td>
         <td>{{book.numberOfPage}}</td>
-        <td>{{book.published}}</td>
+        <td>{{book.published | date:'yyyy'}}</td>
         <td>{{book.typeOfBook}}</td>
         <td>{{book.authorDto.firstName}}</td>
         <td>{{book.authorDto.lastName}}</td>
@@ -55,28 +80,53 @@
           <input type="text" class="form-control" formControlName="itemId" hidden>
         </div>-->
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': isbn.invalid && (isbn.dirty || isbn.touched),
+              'has-success': isbn.valid && (isbn.dirty || isbn.touched)}">
           <label class="col-3 col-form-label">ISBN:</label>
+
           <div class="col-8">
-            <input type="text" class="form-control" formControlName="isbn">
+            <input type="text" class="form-control" formControlName="isbn" required>
+            <div class="form-control-feedback"
+                 *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)">
+            <p *ngIf="isbn.errors.required">ISBN number is required</p>
+            </div>
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': bookTitle.invalid && (bookTitle.dirty || bookTitle.touched),
+              'has-success': bookTitle.valid && (bookTitle.dirty || bookTitle.touched)}">
           <label class="col-3 col-form-label">Book Title:</label>
           <div class="col-8">
             <input type="text" class="form-control" formControlName="bookTitle">
+            <div class="form-control-feedback"
+                 *ngIf="bookTitle.invalid && (bookTitle.dirty || bookTitle.touched)">
+              <p *ngIf="bookTitle.errors.required">Book title is required</p>
+            </div>
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': numberOfPage.invalid && (numberOfPage.dirty || numberOfPage.touched),
+              'has-success': numberOfPage.valid && (numberOfPage.dirty || numberOfPage.touched)}">
           <label class="col-3 col-form-label">Number of Page:</label>
           <div class="col-8">
             <input type="text" class="form-control" formControlName="numberOfPage">
+            <div class="form-control-feedback"
+                 *ngIf="numberOfPage.invalid && (numberOfPage.dirty || numberOfPage.touched)">
+              <p *ngIf="numberOfPage.errors">Number of Page is required</p>
+            </div>
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': typeOfBook.invalid && (typeOfBook.dirty || typeOfBook.touched),
+              'has-success': typeOfBook.valid && (typeOfBook.dirty || typeOfBook.touched)}">
           <label class="col-3 col-form-label">Type of book:</label>
           <div class="col-8">
               <select class="form-control" id="typeOfBook" formControlName="typeOfBook">
@@ -85,24 +135,38 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': firstName.invalid && (firstName.dirty || firstName.touched),
+              'has-success': firstName.valid && (firstName.dirty || firstName.touched)}">
           <label class="col-3 col-form-label">Author first name: </label>
           <div class="col-8">
             <input type="text" class="form-control" formControlName="firstName">
+            <div class="form-control-feedback"
+                 *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+              <p *ngIf="firstName.errors.required">Author first name is required</p>
+            </div>
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"
+             [ngClass]="{
+              'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+              'has-success': lastName.valid && (lastName.dirty || lastName.touched)}">
           <label class="col-3 col-form-label">Author last name: </label>
           <div class="col-8">
             <input type="text" class="form-control" formControlName="lastName">
+            <div class="form-control-feedback"
+                 *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+              <p *ngIf="lastName.errors.required">Author last name is required</p>
+            </div>
           </div>
         </div>
 
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary"  [disabled]="!bookForm.valid" >Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid" >Submit</button>
       <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
     </div>
 
