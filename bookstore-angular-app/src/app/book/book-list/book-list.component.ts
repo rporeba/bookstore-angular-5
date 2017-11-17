@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation, Pipe} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {Book} from "../Book";
 import {BookService} from "../book.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, Validators, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Author} from "../Author";
 
 @Component({
