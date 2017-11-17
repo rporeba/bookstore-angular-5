@@ -6,6 +6,7 @@ import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Author} from "../Author";
 
+
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -17,10 +18,10 @@ export class BookListComponent implements OnInit {
 
   typesOfBook = ['SCI', 'ADVENTAGE', 'CRIME'];
 
-  private itemId: number;
-  private books: Book[];
+  itemId: number;
+  books: Book[];
   selectedBook: Book;
-  private modalRef: NgbModalRef;
+  modalRef: NgbModalRef;
 
   bookForm: FormGroup;
   isbn: FormControl;
@@ -31,10 +32,10 @@ export class BookListComponent implements OnInit {
   firstName: FormControl;
   lastName: FormControl;
 
-  private isButtonDisabled = true;
+  isButtonDisabled = true;
   book: Book;
-  private author: Author;
-  private sub: any;
+  author: Author;
+  sub: any;
 
   onSelectionChange(book) {
     this.selectedBook = (<any>Object).assign({}, this.selectedBook, book);
@@ -45,27 +46,16 @@ export class BookListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private bookService: BookService,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getAllBooks();
-
-    this.sub = this.route.params.subscribe(params => {
-      this.itemId = params['itemId'];
-    });
-
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 
   open(book) {
-
     this.modalRef = this.modalService.open(book);
     this.createFormControls();
     this.createForm();
-
   }
 
   createFormControls() {
@@ -86,7 +76,7 @@ export class BookListComponent implements OnInit {
       typeOfBook: this.typeOfBook,
       firstName: this.firstName,
       lastName: this.lastName
-    });
+    },{ updateOn: 'blur' });
   }
 
   editForm(book) {
@@ -113,8 +103,6 @@ export class BookListComponent implements OnInit {
         }
       );
     }
-
-
 
   }
 

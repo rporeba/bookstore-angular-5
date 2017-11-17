@@ -44,6 +44,18 @@
             <label class="col-sm-2">Author last name:</label>
             <div class="col-sm-10">{{book.authorDto.lastName}}</div>
           </div>
+
+          <div class="row">
+            <label class="col-sm-2">Borrower</label>
+            <div class="form-group">
+            <div class="col-sm-12">
+              <select class="form-control" id="borrower" required>
+                   <option *ngFor="let borrow of borrowers" [value]="pow">{{borrow.lastName}}</option>
+              </select>
+            </div>
+            </div>
+          </div>
+
         </div>
       </table>
     </div>

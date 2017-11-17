@@ -61,6 +61,7 @@
   </div>
 </div>
 
+
 <ng-template #bookDialog let-c="close" let-d="dismiss" >
   <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
 
@@ -125,6 +126,7 @@
          <input type="text" placeholder="yyyy-mm-dd" class="form-control" formControlName="published">
 
 <!--
+
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd"
                   type="text" formControlName="published" ngbDatepicker #d="ngbDatepicker">
@@ -133,6 +135,7 @@
             </button>
           </div>
 -->
+
 
 
           <div class="form-control-feedback"
@@ -191,3 +194,4 @@
 
   </form>
 </ng-template>
+

@@ -1,12 +1,15 @@
 package edu.rporeba.bookstore.controller;
 
+import edu.rporeba.bookstore.dto.BookDto;
 import edu.rporeba.bookstore.dto.BorrowerDto;
 import edu.rporeba.bookstore.model.Borrower;
 import edu.rporeba.bookstore.model.JsonResponse;
 import edu.rporeba.bookstore.service.BorrowerService;
 import edu.rporeba.bookstore.viewmodel.BorrowerCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -19,6 +22,8 @@ import java.util.List;
  */
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/borrowers")
 public class BorrowerController {
 
     @Autowired
@@ -67,15 +72,16 @@ public class BorrowerController {
 
     }
 
-    @RequestMapping(value = "/borrowers", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<BorrowerDto> getAllBorrowers() {
+    public ResponseEntity<List<BorrowerDto>> getAllBorrowers() {
 
-        return borrowerService.findAll();
-
+        List<BorrowerDto> borrowers = borrowerService.findAll();
+        if (borrowers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(borrowers, HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
